@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#130d24" />
+<title>A Little Secret for Apeksha ❤️</title>
+<style>
+:root{--pink:#ff5da2;--red:#ff3f65;--purple:#9d6bff;--bg:#090812}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:#fff;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 15% 15%,#44204d 0,transparent 35%),radial-gradient(circle at 85% 75%,#29195b 0,transparent 35%),linear-gradient(135deg,#090812,#180d2d 60%,#260d24);overflow-x:hidden}
+#stars,.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.star{position:absolute;width:2px;height:2px;border-radius:50%;background:white;opacity:.65;animation:twinkle 2.5s infinite alternate}
+@keyframes twinkle{to{opacity:.12;transform:scale(1.8)}}
+.heart{position:absolute;bottom:-40px;animation:floatUp linear forwards;opacity:.8}
+@keyframes floatUp{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+main{width:min(92%,720px);margin:auto;min-height:100vh;display:grid;place-items:center;padding:30px 0;position:relative;z-index:1}
+.card{width:100%;padding:clamp(24px,6vw,48px);border:1px solid #ffffff25;border-radius:28px;background:#100c20c9;backdrop-filter:blur(16px);box-shadow:0 20px 80px #0008;text-align:center}
+.badge{display:inline-block;padding:7px 13px;border:1px solid #ffffff2c;border-radius:999px;color:#ffc5df;font-size:.85rem;letter-spacing:.08em}
+h1{font-size:clamp(2rem,7vw,4rem);line-height:1.08;margin:22px 0 14px;letter-spacing:-.04em}
+.gradient{background:linear-gradient(90deg,#fff,#ff9bc9,#bba0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{color:#e6dced;line-height:1.7;font-size:1.05rem}
+button{border:0;border-radius:999px;padding:14px 23px;margin:8px 5px;font-size:1rem;font-weight:750;cursor:pointer;transition:transform .2s,filter .2s}
+button:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.primary{color:#230d28;background:linear-gradient(100deg,#ff8fc5,#ff4d83,#b69bff);box-shadow:0 8px 28px #ff4d8340}
+.secondary{color:white;background:#ffffff12;border:1px solid #ffffff30}
+.hidden{display:none!important}
+.big-heart{font-size:4rem;filter:drop-shadow(0 0 18px #ff4f9c);animation:pulse 1.3s infinite}
+@keyframes pulse{50%{transform:scale(1.14)}}
+.letter{white-space:pre-line;text-align:left;background:#ffffff08;border:1px solid #ffffff18;border-radius:18px;padding:22px;min-height:120px;color:#fff0f7;line-height:1.9}
+input{width:min(100%,300px);padding:14px 16px;border-radius:12px;border:1px solid #ffffff40;background:#080711;color:white;font-size:1rem;outline:none;text-align:center}
+input:focus{border-color:#ff83bb}
+.small{font-size:.85rem;color:#bcaecb}
+#toast{min-height:24px;color:#ffb3d5}
+footer{margin-top:22px;color:#a89bb7;font-size:.78rem}
+.yes{background:linear-gradient(100deg,#ff497c,#ff91c3);color:#260b20}
+.confetti{position:fixed;top:-20px;z-index:9;pointer-events:none;animation:fall 3.4s linear forwards;font-size:22px}
+@keyframes fall{to{transform:translateY(110vh) rotate(700deg);opacity:.1}}
+</style>
+</head>
+<body>
+<div id="stars"></div><div class="hearts" id="hearts"></div>
+<main>
+<section class="card" id="welcome">
+ <span class="badge">🔐 A LITTLE SECRET</span>
+ <div class="big-heart" style="margin-top:18px">💌</div>
+ <h1>Hey, <span class="gradient">Apeksha</span>…</h1>
+ <p>Someone who loves you made a tiny little world just for you.<br>Ready to discover your surprise? 🥹❤️</p>
+ <button class="primary" onclick="show('unlock')">Unlock my surprise ✨</button>
+ <footer>Made with love, just for you.</footer>
+</section>
+<section class="card hidden" id="unlock">
+ <span class="badge">💗 SECRET ACCESS</span>
+ <h1>One little <span class="gradient">question</span>…</h1>
+ <p>What nickname or secret word should unlock your surprise?</p>
+ <p class="small">Hint: try <b>love</b> ❤️ (You can change this in the HTML.)</p>
+ <input id="pass" type="password" placeholder="Enter secret word" autocomplete="off" />
+ <div><button class="primary" onclick="unlock()">Unlock ❤️</button></div>
+ <div id="toast" role="status"></div>
+ <button class="secondary" onclick="show('welcome')">Go back</button>
+</section>
+<section class="card hidden" id="letterScreen">
+ <span class="badge">💌 FROM ANUJ, WITH LOVE</span>
+ <h1>A little piece of <span class="gradient">my heart</span></h1>
+ <div class="letter" id="typed"></div>
+ <p>Distance can separate places, but it can't change how special you are to me. 🌙</p>
+ <button class="primary" onclick="openApology()">💌 Open my apology letter</button>
+ <div id="apologyLetter" class="hidden" style="margin:22px 0;padding:22px;text-align:left;border:1px solid #ff8fbd75;border-radius:18px;background:linear-gradient(135deg,#2b132b,#17102b);box-shadow:0 0 30px #ff5da225">
+   <div style="text-align:center;font-size:2rem">🥺❤️</div>
+   <h2 style="text-align:center;margin:8px 0 18px;color:#ffc0dc">To My World 💗</h2>
+   <p id="apologyTyped" style="white-space:pre-line;line-height:1.9;margin-bottom:0"></p>
+ </div>
+ <button class="primary" onclick="show('forever')">One more surprise… 🎆</button>
+</section>
+<section class="card hidden" id="forever">
+ <span class="badge">🌹 JUST US</span>
+ <div class="big-heart">❤️‍🔥</div>
+ <h1><span class="gradient">Apeksha & Anuj</span></h1>
+ <p>You are my peace, my comfort, and one of the most beautiful parts of my life. If I could choose again, I'd still choose you. Today, tomorrow, and in all the little moments in between. 🥹❤️</p>
+ <h2>Will you keep making memories with me? 💍</h2>
+ <button class="yes" onclick="celebrate()">YES, ALWAYS ❤️</button>
+ <button class="secondary" onclick="celebrate()">Obviously 😭💗</button>
+ <p id="finalMsg" class="hidden">YAYYY! 🎉 My favourite person, my favourite story. I love you, Apeksha! ❤️ — Anuj</p>
+ <button class="secondary" onclick="show('welcome')">Replay our surprise ↻</button>
+</section>
+</main>
+<script>
+const secretWord = "love"; // Change this to your own secret word.
+const message = `My Apeksha ❤️\n\nI wanted to give you a little surprise, just to remind you how much you mean to me. You make ordinary days feel special, and even from far away, you have a way of making me feel close to you.\n\nThank you for being my comfort, my smile, and my favourite person to talk to. I may not always find the perfect words, but I hope you never doubt how special you are to me.\n\nNo matter the distance, I'm cheering for you, choosing you, and wishing for many more memories together.\n\nAlways yours,\nAnuj ❤️`;
+function show(id){document.querySelectorAll('main .card').forEach(c=>c.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='letterScreen')typeMessage();}
+function unlock(){const v=document.getElementById('pass').value.trim().toLowerCase();if(v===secretWord){document.getElementById('toast').textContent='Unlocked! This is just for you ❤️';show('letterScreen')}else{document.getElementById('toast').textContent='Not quite, sweetheart. Try the hint 💗';}}
+const apologyMessage = `My world ❤️🥺
+
+I'm truly sorry for all my mistakes and for the times I may have hurt you, upset you, or made you feel unappreciated.
+
+I know that saying sorry doesn't erase everything, but I want you to know that your feelings matter to me. I'll try to listen better, understand you more, and show you through my actions that I'm learning and growing.
+
+You mean so much to me, and I never want to take your love or patience for granted. I can't promise I'll never make a mistake, but I can promise to keep learning, communicate honestly, and try to treat your heart with the care it deserves.
+
+I'm sorry, my world. ❤️🫂
+Always yours,
+Anuj 💌`;
+let apologyOpened = false;
+function openApology(){
+ const box=document.getElementById('apologyLetter');
+ box.classList.remove('hidden');
+ if(apologyOpened)return;
+ apologyOpened=true;
+ const el=document.getElementById('apologyTyped');
+ let i=0;
+ (function tick(){el.textContent=apologyMessage.slice(0,i++);if(i<=apologyMessage.length)setTimeout(tick,22)})();
+}
+let timer;
+function typeMessage(){const el=document.getElementById('typed');if(el.dataset.done)return;el.dataset.done='1';let i=0;const tick=()=>{el.textContent=message.slice(0,i++);if(i<=message.length)setTimeout(tick,24)};tick();}
+function celebrate(){document.getElementById('finalMsg').classList.remove('hidden');for(let i=0;i<90;i++){setTimeout(()=>{const e=document.createElement('div');e.className='confetti';e.textContent=['💖','💗','❤️','✨','🌹','🎉'][Math.floor(Math.random()*6)];e.style.left=Math.random()*100+'vw';e.style.animationDuration=(2+Math.random()*2)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),4500)},i*20)}}
+const stars=document.getElementById('stars');for(let i=0;i<95;i++){const s=document.createElement('i');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*3+'s';stars.appendChild(s)}
+setInterval(()=>{const h=document.createElement('span');h.className='heart';h.textContent=['💗','💕','✨','❤️'][Math.floor(Math.random()*4)];h.style.left=Math.random()*100+'%';h.style.fontSize=(14+Math.random()*20)+'px';h.style.animationDuration=(5+Math.random()*5)+'s';document.getElementById('hearts').appendChild(h);setTimeout(()=>h.remove(),10500)},650);
+document.getElementById('pass').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+</script>
+</body>
+</html>
